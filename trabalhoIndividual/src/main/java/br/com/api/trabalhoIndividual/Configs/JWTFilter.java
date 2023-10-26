@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -19,14 +18,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
-import br.com.api.trabalhoIndividual.Entities.Residente;
-
 @Component
-public class JWTFilter<ResidentenamePasswordAuthenticationToken> extends OncePerRequestFilter { 
+public class JWTFilter extends OncePerRequestFilter { 
 
 	
 	@Autowired
-	private UserDetails userDetailsService;
+	private UserDetailsServiceImpl userDetailsService;
 	@Autowired
 	private JWTUtil jwtUtil;
 
@@ -48,13 +45,14 @@ public class JWTFilter<ResidentenamePasswordAuthenticationToken> extends OncePer
 						"Foi passado um Token JWT inválido no Bearer Header");
 				
 			} else { 
+				try {
 					String email = jwtUtil.validateTokenAndRetrieveSubject(jwt);
-					Object ResidenteDetailsService;
-					Residente ResidenteDetails = ((Residente) ResidenteDetailsService).loadResidenteByResidentename(email);
-					UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(null, null);
+					UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+					UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email,
+							userDetails.getPassword(), userDetails.getAuthorities());
 					if (SecurityContextHolder.getContext().getAuthentication() == null) {
 						
-						SecurityContextHolder.getContext().setAuthentication((Authentication) authToken);
+						SecurityContextHolder.getContext().setAuthentication(authToken);
 					}
 				} catch (JWTVerificationException exc) { 
 					response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Token JWT Inválido");
@@ -62,8 +60,8 @@ public class JWTFilter<ResidentenamePasswordAuthenticationToken> extends OncePer
 					response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 							"Não foi possível obter os dados do Usuario a partir do Token - " + e);
 				}
-			
+			}
 		}
-		filterChain.doFilter(request, response);
+		filterChain.doFilter(request, response); //Independentemente de o usuário ser autenticado ou não, o filtro chama filterChain.doFilter para continuar o processamento da solicitação.
 	}
 }
