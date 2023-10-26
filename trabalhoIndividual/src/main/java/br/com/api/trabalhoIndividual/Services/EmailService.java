@@ -1,4 +1,4 @@
-package br.com.api.trabalhoIndividual.Services.Email;
+package br.com.api.trabalhoIndividual.Services;
 
 
 
@@ -11,8 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
-
-import br.com.api.trabalhoIndividual.Services.UserService;
 
 
 @Configuration

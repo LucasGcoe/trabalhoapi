@@ -20,8 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.api.trabalhoIndividual.DTO.MessageResponseDTO;
 import br.com.api.trabalhoIndividual.DTO.ResidenteDTO;
 import br.com.api.trabalhoIndividual.Entities.Residente;
+import br.com.api.trabalhoIndividual.Services.EmailService;
 import br.com.api.trabalhoIndividual.Services.ResidenteService;
-import br.com.api.trabalhoIndividual.Services.Email.EmailService;
+
 
 @RestController
 @RequestMapping("/residentes")
