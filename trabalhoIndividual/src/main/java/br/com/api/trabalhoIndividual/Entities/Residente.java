@@ -75,4 +75,27 @@ public class Residente {
 		return null;
 	}
 
+	public String getEmail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Residente loadResidenteByResidentename(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+
 }
