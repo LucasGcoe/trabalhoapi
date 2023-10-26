@@ -62,6 +62,6 @@ public class JWTFilter extends OncePerRequestFilter {
 				}
 			}
 		}
-		filterChain.doFilter(request, response); //Independentemente de o usuário ser autenticado ou não, o filtro chama filterChain.doFilter para continuar o processamento da solicitação.
+		filterChain.doFilter(request, response); 
 	}
 }

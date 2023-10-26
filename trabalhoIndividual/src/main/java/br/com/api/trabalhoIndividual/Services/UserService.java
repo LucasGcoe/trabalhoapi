@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 
 import br.com.api.trabalhoIndividual.Entities.Residente;
+import br.com.api.trabalhoIndividual.Entities.User;
 import br.com.api.trabalhoIndividual.Repositories.ResidenteRepository;
 import br.com.api.trabalhoIndividual.Repositories.UserRepository;
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.api.trabalhoIndividual.DTO.ResidenteDTO;
 import br.com.api.trabalhoIndividual.Entities.Residente;
+import br.com.api.trabalhoIndividual.Entities.User;
 
 public class ResidenteService {
 
@@ -33,6 +34,11 @@ public class ResidenteService {
 	}
 
 	public ResidenteDTO listarResidentesPorCPF(String cpf) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static User findByEmail(String email) {
 		// TODO Auto-generated method stub
 		return null;
 	}

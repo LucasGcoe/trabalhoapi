@@ -80,7 +80,7 @@ public class Residente {
 		return null;
 	}
 
-	public Object getPassword() {
+	public static CharSequence getPassword() {
 		// TODO Auto-generated method stub
 		return null;
 	}

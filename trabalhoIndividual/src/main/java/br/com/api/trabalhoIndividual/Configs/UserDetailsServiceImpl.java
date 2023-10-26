@@ -5,17 +5,14 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import br.com.api.trabalhoIndividual.DTO.UserDTO;
-import br.com.api.trabalhoIndividual.Repositories.ResidenteRepository;
 import br.com.api.trabalhoIndividual.Repositories.RoleRepository;
 import br.com.api.trabalhoIndividual.Repositories.UserRepository;
-import br.com.api.trabalhoIndividual.Services.ResidenteService;
 import br.com.api.trabalhoIndividual.Services.UserService;
 
 

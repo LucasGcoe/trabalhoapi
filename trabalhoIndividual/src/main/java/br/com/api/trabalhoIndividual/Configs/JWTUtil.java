@@ -4,7 +4,8 @@ package br.com.api.trabalhoIndividual.Configs;
 
 	import java.util.Date;
 
-	import org.springframework.beans.factory.annotation.Value;
+import org.apache.tomcat.jni.User;
+import org.springframework.beans.factory.annotation.Value;
 	import org.springframework.stereotype.Component;
 
 	import com.auth0.jwt.JWT;
@@ -58,13 +59,13 @@ import io.jsonwebtoken.Jwts;
 		}
 
 		
-		public String generateTokenWithUserData(Residente residente) throws IllegalArgumentException, JWTCreationException {
+		public String generateTokenWithUserData(br.com.api.trabalhoIndividual.Entities.User residenteResumido) throws IllegalArgumentException, JWTCreationException {
 			
 			ObjectMapper mapper = new ObjectMapper();
 			String userJson = null; 
 			try {
 				
-				userJson = mapper.writeValueAsString(residente);
+				userJson = mapper.writeValueAsString(residenteResumido);
 			} catch (JsonProcessingException e) { 
 				e.printStackTrace();
 			}
