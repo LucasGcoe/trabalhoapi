@@ -70,4 +70,9 @@ public class Residente {
 				+ "]";
 	}
 
+	public Residente get() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -11,4 +11,9 @@ public interface ResidenteRepository extends JpaRepository<Residente, Integer>{
 	@Query(value = "select * from residente wher id_residente = :residente", nativeQuery = true)
 		Residente findById(String residente);
 
+	static Object findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
