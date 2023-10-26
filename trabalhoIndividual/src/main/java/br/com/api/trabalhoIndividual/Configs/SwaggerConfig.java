@@ -1,4 +1,4 @@
-package br.com.api.Configs;
+package br.com.api.trabalhoIndividual.Configs;
 
 import java.util.ArrayList;
 import java.util.Arrays;

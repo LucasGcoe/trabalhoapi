@@ -1,4 +1,4 @@
-package br.com.api.Configs;
+package br.com.api.trabalhoIndividual.Configs;
 
 
 import java.io.IOException;
@@ -51,8 +51,7 @@ public class JWTFilter<ResidentenamePasswordAuthenticationToken> extends OncePer
 					String email = jwtUtil.validateTokenAndRetrieveSubject(jwt);
 					Object ResidenteDetailsService;
 					Residente ResidenteDetails = ((Residente) ResidenteDetailsService).loadResidenteByResidentename(email);
-					ResidentenamePasswordAuthenticationToken authToken = new ResidentenamePasswordAuthenticationToken(email,
-							ResidenteDetails.getPassword(), ResidenteDetails.getAuthorities());
+					UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(null, null);
 					if (SecurityContextHolder.getContext().getAuthentication() == null) {
 						
 						SecurityContextHolder.getContext().setAuthentication((Authentication) authToken);

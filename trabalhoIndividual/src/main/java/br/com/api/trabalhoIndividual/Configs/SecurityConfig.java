@@ -1,4 +1,4 @@
-package br.com.api.Configs;
+package br.com.api.trabalhoIndividual.Configs;
 
 import javax.servlet.http.HttpServletResponse;
 
