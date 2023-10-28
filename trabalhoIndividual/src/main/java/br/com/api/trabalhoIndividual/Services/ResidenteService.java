@@ -8,22 +8,40 @@ import org.springframework.stereotype.Service;
 
 import br.com.api.trabalhoIndividual.DTO.ResidenteAtualizarDTO;
 import br.com.api.trabalhoIndividual.DTO.ResidenteDTO;
+import br.com.api.trabalhoIndividual.Entities.Endereco;
 import br.com.api.trabalhoIndividual.Entities.Residente;
+import br.com.api.trabalhoIndividual.Repositories.EnderecoRepository;
 import br.com.api.trabalhoIndividual.Repositories.ResidenteRepository;
 
 @Service
 public class ResidenteService {
 
 	@Autowired
-	ResidenteRepository clienteRepository;
-
-	public Residente salvarResidente(Residente residente) {
-		return residenteRepository.save(residente);
-	}
+	ResidenteRepository residenteRepository;
+	@Autowired
+	EnderecoService enderecoService;
+	@Autowired
+	EnderecoRepository enderecoRepository;
+//	public void  salvarResidente(Residente residente) {
+//		System.out.println(residente.toString());
+//
+//		Endereco viaCep = enderecoService.pesquisarEndereco(residente.getEndereco().getCep());
+//		Endereco enderecoNovo = new Endereco();
+//		enderecoNovo.setBairro(viaCep.getBairro());
+//		enderecoNovo.setCep(residente.getEndereco().getCep());
+//		enderecoNovo.setLocalidade(viaCep.getLocalidade());
+//		enderecoNovo.setLogradouro(viaCep.getLogradouro());
+//		enderecoNovo.setUf(viaCep.getUf());
+//		System.out.println(enderecoNovo.toString());
+//		residente.setEndereco(enderecoNovo);
+//		enderecoRepository.save(enderecoNovo);
+//		residenteRepository.save(residente);
+//
+//	}
 
 	public List<ResidenteDTO> listarResidentes() {
 
-		List<ResidenteDTO> infoResidente = new ArrayList<>();
+		List<ResidenteDTO> infoResidentes = new ArrayList<>();
 		List<Residente> residentes = residenteRepository.findAll();
 		for (Residente residente : residentes) {
 			infoResidentes.add(converterResidenteDTO(residente));
@@ -98,12 +116,13 @@ public class ResidenteService {
 		Residente residente = residenteRepository.findByCpf(cpf);
 		return converterResidenteDTO(residente);
 	}
-    public Residente findByCpf(String cpf){
-        return residenteRepository.findByCpf(cpf);
-    }
-    
-    public Residente findById_residente(Integer id){
-        return residenteRepository.findById(id).get();
-    }
+
+	public Residente findByCpf(String cpf) {
+		return residenteRepository.findByCpf(cpf);
+	}
+
+	public Residente findById_residente(Integer id) {
+		return residenteRepository.findById(id).get();
+	}
 
 }

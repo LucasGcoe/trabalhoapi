@@ -45,18 +45,19 @@ public class SwaggerConfig {
 				.securityContexts(Collections.singletonList(securityContext()))
 				.securitySchemes(Arrays.asList(apiKey()))
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("br.com.api.g1.controllers"))
+				.apis(RequestHandlerSelectors.basePackage("br.com.api.trabalhoIndividual.Controllers"))
 				.paths(PathSelectors.any())
 				.build();
 	}
 	
 	public ApiInfo apiInfo() {
 		ApiInfo apiInfo = new ApiInfoBuilder()
-				.title("Api Lucas de Oliveira Mariano")
+				.title("Documentação do meu trabalho")
 				.description("Projeto final Api 2023.2 Serratec")
 				.license("Apache license version 2.0")
-				.version("7.1.1")
+				.version("4.7.1")
 				.build();
 		return apiInfo;
 	}
+
 }

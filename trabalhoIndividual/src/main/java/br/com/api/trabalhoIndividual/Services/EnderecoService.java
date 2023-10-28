@@ -74,7 +74,7 @@ public class EnderecoService {
 		return restTemplate.getForObject(uri, Endereco.class, params);
 	}
 
-	public Endereco salvarEndereco(EnderecoDTO endereco) {
+	public Endereco salvarEndereco(Endereco endereco) {
 		Endereco viaCep = pesquisarEndereco(endereco.getCep());
 		Endereco enderecoNovo = new Endereco();
 		enderecoNovo.setBairro(viaCep.getBairro());
@@ -82,6 +82,7 @@ public class EnderecoService {
 		enderecoNovo.setLocalidade(viaCep.getLocalidade());
 		enderecoNovo.setLogradouro(viaCep.getLogradouro());
 		enderecoNovo.setUf(viaCep.getUf());
+		System.out.println(enderecoNovo.toString());
 		return enderecoRepository.save(enderecoNovo);
 	}
 

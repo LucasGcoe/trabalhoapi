@@ -1,5 +1,7 @@
 package br.com.api.trabalhoIndividual.Configs;
 
+
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import br.com.api.trabalhoIndividual.Configs.UserDatailsServiceImpl.UserDetailsServiceImpl;
 import br.com.api.trabalhoIndividual.Repositories.UserRepository;
-
-
 
 @Configuration 
 @EnableWebSecurity
@@ -51,10 +50,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		            .csrf().disable()
 		            .httpBasic().disable()
 		            .authorizeHttpRequests()
-		            .antMatchers("/user/registro","/user/login","/roles","/clientes/salvarCliente","/categorias/listarCategorias","/categorias/listarCategoria/{id}", "/produtos/listarProdutos", "/produtos/listarIdProdutos/{id}").permitAll()//TODAS AS ROTAS TEM QUE ENTRAR AQUI, DE TODOS OS CONTROLES################
-		            .antMatchers("/clientes/salvarCliente").hasRole("CLIENTE")
-		            .antMatchers("/funcionarios/atualizarFuncionario/{id}","/funcionarios/desativarFuncionario/{id}","/funcionarios/deletarIdFuncionarios/{id}","/funcionarios/listarIdFuncionarios/{id}","/funcionarios/salvarFuncionario","/funcionarios/listarFuncionarios","/endereco/deletarEndereco/{id}","/endereco/listarEnderecos","/cliente/deletarCliente/{id}","/cliente/listarCliente/{id}","/cliente/listarClientes","/produtos/deletarIdProdutos/{id}","/produtos/desativarProduto/{id}","/produtos/atualizarProduto/{id}","/produtos/salvarProduto","/pedidos/atualizarPedido/{id}","/categorias/deletarCategoria/{id}","/categorias/desativarCategoria/{id}","/categorias/atualizarCategoria/{id}","/categorias/salvarCategoria").hasRole("FUNCIONARIO")
-		            .antMatchers("/endereco/atualizarEndereco/{id}","/endereco/desativarEndereco/{id}","/endereco/salvarEndereco","/endereco/listarEndereco/{id}","/cliente/desativarCliente/{id}","/cliente/atualizarCliente/{id}","/pedidos/deletarIdPedido/{id}","/pedidos/desativarPedido/{id}","/pedidos/salvarPedido","/pedidos/listarPedidos","/pedidos/listarIdPedido/{id}").hasAnyRole("CLIENTE", "FUNCIONARIO")
+		            .antMatchers("/habilidades/salvarHabilidade","/user/registro","/user/login","/roles","/residentes/salvarResidente", "/habilidades/listarHabilidades", "/habilidades/listarIdHabilidades/{id}").permitAll()//TODAS AS ROTAS TEM QUE ENTRAR AQUI, DE TODOS OS CONTROLES################
+		            .antMatchers("/residentes/salvarResidente").permitAll()//hasRole("RESIDENTE")
+		            .antMatchers("/residente/deletarResidente/{id}","/residente/listarResidente/{id}","/residente/listarResidentes","/habilidades/deletarIdHabilidades/{id}","/habilidades/atualizarHabilidade/{id}","/habilidades/salvarHabilidade").permitAll()//hasRole("HABILIDADE")
+		            .antMatchers("/endereco/atualizarEndereco/{id}","/endereco/desativarEndereco/{id}","/endereco/salvarEndereco","/endereco/listarEndereco/{id}","/residente/desativarResidente/{id}","/residente/atualizarResidente/{id}","/residente/deletarResidente/{id}","/residente/listarResidente/{id}","/residente/listarResidentes","/habilidades/deletarIdHabilidades/{id}","/habilidades/atualizarHabilidade/{id}").permitAll()//hasAnyRole("RESIDENTE")
 		            .and()
 	                .userDetailsService(uds)
 	                .exceptionHandling()

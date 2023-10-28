@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@RestControllerAdvice 
+@RestControllerAdvice // tratamento de exceções
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@Override
@@ -37,7 +37,8 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 		return super.handleExceptionInternal(ex, erro, headers, status, request);
 	}
 
-	
+	//o método abaixo pode manipular o erro de forma específica fazendo o uso do 
+	//parâmetro ConstraintViolationException. constraint = restrição
 	@ExceptionHandler(ConstraintViolationException.class)
 	protected ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException ex, WebRequest request) {
 		List<String> errors = new ArrayList<>();
@@ -56,4 +57,4 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
 }
 
-
+//pesquisar sobre a classe FieldError

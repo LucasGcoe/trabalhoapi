@@ -3,7 +3,6 @@ package br.com.api.trabalhoIndividual.Enums;
 public enum TipoRoleEnum {
 
 	ROLE_RESIDENTE("RESIDENTE");
-	
 
 	private String tipo;
 
@@ -14,5 +13,5 @@ public enum TipoRoleEnum {
 	public String getTipo() {
 		return tipo;
 	}
-	
+
 }

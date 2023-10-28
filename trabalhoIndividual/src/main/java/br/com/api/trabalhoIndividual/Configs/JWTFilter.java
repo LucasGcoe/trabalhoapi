@@ -17,8 +17,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
-import br.com.api.trabalhoIndividual.Configs.UserDatailsServiceImpl.UserDetailsServiceImpl;
-
 @Component
 public class JWTFilter extends OncePerRequestFilter { //garante que o filtro seja executado apenas uma vez por solicitação
 

@@ -1,6 +1,5 @@
 package br.com.api.trabalhoIndividual.Entities;
 
-
 import java.util.Date;
 import java.util.List;
 
@@ -13,30 +12,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "cliente")
-public class Cliente{
+@Table(name = "residente")
+public class Residente{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_cliente")
-	private Integer id_cliente;	
-	@Column(name = "telefone_cliente")
+	@Column(name = "id_residente")
+	private Integer id_residente;	
+	@Column(name = "telefone_residente")
 //	@NotNull 
 	@Size(max=14)
 	private String telefone;
-	@Column(name = "usuario_cliente")
+	@Column(name = "usuario_residente")
 //	@NotNull 
 	@Size(max=60)
 	private String usuario;
-	@Column(name = "cpf_cliente")
+	@Column(name = "cpf_residente")
 //	@NotNull 
 	@Size(max=11)
 	private String cpf;
-	@Column(name = "nascimento_cliente")
+	@Column(name = "nascimento_residente")
 //	@NotNull 
 	private Date nascimento;
 	@Column(name = "ativo")
@@ -50,39 +48,39 @@ public class Cliente{
 	private Endereco endereco;
 		
 	@OneToMany
-	private List<Pedido> pedidos;
+	private List<Habilidade> habilidades;
 			
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	public Cliente() {
+	public Residente() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cliente(Integer id_cliente, @Size(max = 14) String telefone,
+	public Residente(Integer id_residente, @Size(max = 14) String telefone,
 			@Size(max = 60) String usuario, @Size(max = 11) String cpf,
-			Date nascimento, Boolean ativo, Endereco endereco, List<Pedido> pedidos,
+			Date nascimento, Boolean ativo, Endereco endereco, List<Habilidade> habilidades,
 			User user) {
 		super();
-		this.id_cliente = id_cliente;
+		this.id_residente = id_residente;
 		this.telefone = telefone;
 		this.usuario = usuario;
 		this.cpf = cpf;
 		this.nascimento = nascimento;
 		this.ativo = ativo;
 		this.endereco = endereco;
-		this.pedidos = pedidos;
+		this.habilidades = habilidades;
 		this.user = user;
 	}
 
-	public Integer getId_cliente() {
-		return id_cliente;
+	public Integer getId_residente() {
+		return id_residente;
 	}
 
-	public void setId_cliente(Integer id_cliente) {
-		this.id_cliente = id_cliente;
+	public void setId_residente(Integer id_residente) {
+		this.id_residente = id_residente;
 	}
 
 	public String getTelefone() {
@@ -125,12 +123,12 @@ public class Cliente{
 		this.ativo = ativo;
 	}
 
-	public List<Pedido> getPedidos() {
-		return pedidos;
+	public List<Habilidade> getHabilidades() {
+		return habilidades;
 	}
 
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
+	public void setHabilidades(List<Habilidade> habilidades) {
+		this.habilidades = habilidades;
 	}
 
 	public User getUser() {
@@ -151,10 +149,9 @@ public class Cliente{
 
 	@Override
 	public String toString() {
-		return "Cliente [id_cliente=" + id_cliente + ", telefone=" + telefone + ", usuario=" + usuario + ", cpf=" + cpf
-				+ ", nascimento=" + nascimento + ", ativo=" + ativo + ", pedidos=" + pedidos + ", user=" + user + "]";
+		return "Cliente [id_cliente=" + id_residente + ", telefone=" + telefone + ", usuario=" + usuario + ", cpf=" + cpf
+				+ ", nascimento=" + nascimento + ", ativo=" + ativo + ", habilidades=" + habilidades + ", user=" + user + "]";
 	}
 	
 	
 }
-	

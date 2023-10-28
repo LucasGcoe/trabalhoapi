@@ -23,7 +23,7 @@ public class Endereco {
 	@Size(max=10)
 	private String cep;
 	@Column(name = "logradouro_endereco")
-	@NotNull 
+	
 	@Size(max=60)
 	private String logradouro;
 	@Column(name = "bairro_endereco")
@@ -41,10 +41,7 @@ public class Endereco {
 	@Column(name = "ativo")
 	private Boolean ativo;
 	
-//	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
-//	@ManyToOne
-//	@JoinColumn(name = "cliente_id")
-//	private Cliente cliente;
+
 	
 	public Endereco() {
 		super();
@@ -53,7 +50,7 @@ public class Endereco {
 	public Endereco(Integer id_endereco, @NotNull @Size(max = 10) String cep,
 			@NotNull @Size(max = 60) String logradouro, @NotNull @Size(max = 30) String bairro,
 			@NotNull @Size(max = 35) String localidade, @NotNull @Size(max = 2) String uf, Boolean ativo,
-			Residente residente) {
+			Residente cliente) {
 		super();
 		this.id_endereco = id_endereco;
 		this.cep = cep;
@@ -113,6 +110,13 @@ public class Endereco {
 		this.uf = uf;
 	}
 
+//	public Cliente getCliente() {
+//		return cliente;
+//	}
+//
+//	public void setClientes(Cliente cliente) {
+//		this.cliente = cliente;
+//	}
 
 	public Boolean getAtivo() {
 		return ativo;
