@@ -12,13 +12,14 @@ import org.springframework.stereotype.Repository;
 import br.com.api.trabalhoIndividual.Enums.TipoRoleEnum;
 
 @Repository
+public interface RoleRepository extends JpaRepository<Role, Integer>{
 
-public interface RoleRepository extends JpaRepository<Role, Integer> {
 	Optional<Role> findByName(TipoRoleEnum roleUser);
-
-	@Query(value = "select r.* from residenteTeste u \rzn"
-			+ "inner join residenteRole ur on u.id_residente = ur.residente_id\r\n"
+	
+	@Query(value="select r.* from usuario_teste u \r\n"
+			+ "inner join usuario_role ur on u.id_usuario = ur.usuario_id\r\n"
 			+ "inner join roles r on ur.role_id = r.id\r\n"
-			+ "where u.email_residente = :email", nativeQuery=true)
-	Set<Role> roles (String email);
+			+ "where u.email_usuario = :email", nativeQuery=true)
+	Set<Role> roles(String email);
+	
 }

@@ -1,5 +1,7 @@
 package br.com.api.trabalhoIndividual.Entities;
 
+
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -7,95 +9,152 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "residente")
+@Table(name = "cliente")
+public class Cliente{
 
-public class Residente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_residente")
-	private Integer id_residente;
-
-	@Column(name = "residente")
+	@Column(name = "id_cliente")
+	private Integer id_cliente;	
+	@Column(name = "telefone_cliente")
 //	@NotNull 
-	@Size(max = 400)
-	private String residente;
-
+	@Size(max=14)
+	private String telefone;
+	@Column(name = "usuario_cliente")
+//	@NotNull 
+	@Size(max=60)
+	private String usuario;
+	@Column(name = "cpf_cliente")
+//	@NotNull 
+	@Size(max=11)
+	private String cpf;
+	@Column(name = "nascimento_cliente")
+//	@NotNull 
+	private Date nascimento;
+	@Column(name = "ativo")
+	private Boolean ativo;
+	
+//	@OneToMany(mappedBy = "cliente")
+//	private List<Endereco> enderecos;
+	
+	@OneToOne
+	@JoinColumn(name = "endereco_id")
+	private Endereco endereco;
+		
 	@OneToMany
-	private List<Habilidade> habilidades;
+	private List<Pedido> pedidos;
+			
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
-	public Residente() {
+	public Cliente() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Residente(Integer id_residente, @Size(max = 400) String residente, List<Habilidade> habilidades) {
+	public Cliente(Integer id_cliente, @Size(max = 14) String telefone,
+			@Size(max = 60) String usuario, @Size(max = 11) String cpf,
+			Date nascimento, Boolean ativo, Endereco endereco, List<Pedido> pedidos,
+			User user) {
 		super();
-		this.id_residente = id_residente;
-		this.residente = residente;
-		this.habilidades = habilidades;
+		this.id_cliente = id_cliente;
+		this.telefone = telefone;
+		this.usuario = usuario;
+		this.cpf = cpf;
+		this.nascimento = nascimento;
+		this.ativo = ativo;
+		this.endereco = endereco;
+		this.pedidos = pedidos;
+		this.user = user;
 	}
 
-	public Integer getId_residente() {
-		return id_residente;
+	public Integer getId_cliente() {
+		return id_cliente;
 	}
 
-	public void setId_residente(Integer id_residente) {
-		this.id_residente = id_residente;
+	public void setId_cliente(Integer id_cliente) {
+		this.id_cliente = id_cliente;
 	}
 
-	public String getResidente() {
-		return residente;
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setResidente(String residente) {
-		this.residente = residente;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
-	public List<Habilidade> getHabilidades() {
-		return habilidades;
+	public String getUsuario() {
+		return usuario;
 	}
 
-	public void setHabilidades(List<Habilidade> habilidades) {
-		this.habilidades = habilidades;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public Date getNascimento() {
+		return nascimento;
+	}
+
+	public void setNascimento(Date nascimento) {
+		this.nascimento = nascimento;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}	
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	@Override
 	public String toString() {
-		return "Residente [id_residente=" + id_residente + ", residente=" + residente + ", habilidades=" + habilidades
-				+ "]";
+		return "Cliente [id_cliente=" + id_cliente + ", telefone=" + telefone + ", usuario=" + usuario + ", cpf=" + cpf
+				+ ", nascimento=" + nascimento + ", ativo=" + ativo + ", pedidos=" + pedidos + ", user=" + user + "]";
 	}
-
-	public Residente get() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getEmail() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public static CharSequence getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Residente loadResidenteByResidentename(String email) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
 	
-
 }
+	

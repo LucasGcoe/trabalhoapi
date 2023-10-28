@@ -1,3 +1,6 @@
+
+
+
 package br.com.api.trabalhoIndividual.Exceptions;
 
 import java.util.ArrayList;
@@ -35,7 +38,6 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	
-	
 	@ExceptionHandler(ConstraintViolationException.class)
 	protected ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException ex, WebRequest request) {
 		List<String> errors = new ArrayList<>();
@@ -53,4 +55,5 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 }
+
 

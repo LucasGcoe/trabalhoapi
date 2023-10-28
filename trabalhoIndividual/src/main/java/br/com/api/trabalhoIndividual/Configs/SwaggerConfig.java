@@ -52,12 +52,11 @@ public class SwaggerConfig {
 	
 	public ApiInfo apiInfo() {
 		ApiInfo apiInfo = new ApiInfoBuilder()
-				.title("Documentação da Api do Grupo 01")
+				.title("Api Lucas de Oliveira Mariano")
 				.description("Projeto final Api 2023.2 Serratec")
 				.license("Apache license version 2.0")
 				.version("7.1.1")
 				.build();
 		return apiInfo;
 	}
-
 }

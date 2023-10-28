@@ -10,28 +10,27 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import br.com.api.trabalhoIndividual.Repositories.ResidenteRepository;
+import br.com.api.trabalhoIndividual.Configs.UserDatailsServiceImpl.UserDetailsServiceImpl;
+import br.com.api.trabalhoIndividual.Repositories.UserRepository;
 
 
 
 @Configuration 
 @EnableWebSecurity
-public class SecurityConfig<ResidenteDetailsServicempl> extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	    @Autowired
-	    ResidenteRepository userRepo;
+	    UserRepository userRepo;
 
 	    @Autowired
 	    JWTFilter filter;
 
 	    @Autowired
-	    ResidenteDetailsServicempl uds;
+	    UserDetailsServiceImpl uds;
 
 	    @Bean
 	    @Override
@@ -45,19 +44,19 @@ public class SecurityConfig<ResidenteDetailsServicempl> extends WebSecurityConfi
 	    }
 
 	    @Override
-	    protected void configure(HttpSecurity http) throws Exception { 
+	    protected void configure(HttpSecurity http) throws Exception { // Metodo encarregado de configurar a seguranca da API
 	    	http
 		            .cors()
 		            .and()
 		            .csrf().disable()
 		            .httpBasic().disable()
 		            .authorizeHttpRequests()
-		            .antMatchers("/residente/registro","/residente/login","/roles","/clientes/salvarResidente").permitAll()
-		            .antMatchers("/residentes/salvarResidentes").hasRole("RESIDENTE")
-		            .antMatchers("/habilidades/atualizarHabilidade/{id}","/habilidades/desativarHabilidade/{id}","/habilidades/deletarIdhabilidades/{id}","/habilidades/listarIdHabilidades/{id}","/habilidades/salvarHabilidade","/habilidades/listarHabilidades").hasRole("HABILIDADE")
-		            .antMatchers("/residente/desativarResidente/{id}","/residente/atualizarResidente/{id}").hasAnyRole("RESIDENTE", "HABILIDADE")
+		            .antMatchers("/user/registro","/user/login","/roles","/clientes/salvarCliente","/categorias/listarCategorias","/categorias/listarCategoria/{id}", "/produtos/listarProdutos", "/produtos/listarIdProdutos/{id}").permitAll()//TODAS AS ROTAS TEM QUE ENTRAR AQUI, DE TODOS OS CONTROLES################
+		            .antMatchers("/clientes/salvarCliente").hasRole("CLIENTE")
+		            .antMatchers("/funcionarios/atualizarFuncionario/{id}","/funcionarios/desativarFuncionario/{id}","/funcionarios/deletarIdFuncionarios/{id}","/funcionarios/listarIdFuncionarios/{id}","/funcionarios/salvarFuncionario","/funcionarios/listarFuncionarios","/endereco/deletarEndereco/{id}","/endereco/listarEnderecos","/cliente/deletarCliente/{id}","/cliente/listarCliente/{id}","/cliente/listarClientes","/produtos/deletarIdProdutos/{id}","/produtos/desativarProduto/{id}","/produtos/atualizarProduto/{id}","/produtos/salvarProduto","/pedidos/atualizarPedido/{id}","/categorias/deletarCategoria/{id}","/categorias/desativarCategoria/{id}","/categorias/atualizarCategoria/{id}","/categorias/salvarCategoria").hasRole("FUNCIONARIO")
+		            .antMatchers("/endereco/atualizarEndereco/{id}","/endereco/desativarEndereco/{id}","/endereco/salvarEndereco","/endereco/listarEndereco/{id}","/cliente/desativarCliente/{id}","/cliente/atualizarCliente/{id}","/pedidos/deletarIdPedido/{id}","/pedidos/desativarPedido/{id}","/pedidos/salvarPedido","/pedidos/listarPedidos","/pedidos/listarIdPedido/{id}").hasAnyRole("CLIENTE", "FUNCIONARIO")
 		            .and()
-	               .userDetailsService((UserDetailsService) uds)
+	                .userDetailsService(uds)
 	                .exceptionHandling()
 	                    .authenticationEntryPoint(
 	                            (request, response, authException) ->
@@ -69,4 +68,10 @@ public class SecurityConfig<ResidenteDetailsServicempl> extends WebSecurityConfi
 
 	        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 	    }
+
+//	@Bean
+//	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http.authorizeHttpRequests().anyRequest().permitAll().and().csrf(csrf -> csrf.disable());
+//		return http.build();
+//	}
 }

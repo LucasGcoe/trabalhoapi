@@ -1,23 +1,18 @@
 package br.com.api.trabalhoIndividual.Enums;
 
+public enum TipoRoleEnum {
 
-
+	ROLE_RESIDENTE("RESIDENTE");
 	
-	public enum TipoRoleEnum {
 
-		ROLE_RESIDENTE1("RESIDENTE"),
-		ROLE_HABILIDADE("HABILIDADE");
+	private String tipo;
 
-		private String tipo;
-
-		TipoRoleEnum(String tipo) {
-			this.tipo = tipo;
-		}
-
-		public String getTipo() {
-			return tipo;
-			
-		}
+	TipoRoleEnum(String tipo) {
+		this.tipo = tipo;
 	}
 
-
+	public String getTipo() {
+		return tipo;
+	}
+	
+}

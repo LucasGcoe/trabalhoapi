@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import br.com.api.trabalhoIndividual.DTO.UserDTO;
-import br.com.api.trabalhoIndividual.Entities.Residente;
+
+import br.com.api.trabalhoIndividual.Services.ResidenteService;
 
 public interface UserRepository extends JpaRepository<UserDTO, Integer> {
 
@@ -15,7 +16,7 @@ public interface UserRepository extends JpaRepository<UserDTO, Integer> {
 	Optional<UserDTO> findByEmail(String email);
 	
 	@Query(value = "select * from residente where cpf_residente  = :cpf", nativeQuery = true)
-	Residente findByCpf(String cpf);
+	ResidenteService findByCpf(String cpf);
 
 	User save(User user);
 

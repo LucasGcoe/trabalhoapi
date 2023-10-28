@@ -2,7 +2,6 @@ package br.com.api.trabalhoIndividual.Entities;
 
 import java.util.Set;
 
-import javax.management.relation.Role;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,21 +22,21 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_residente")
-    private Integer idResidente;
-    @Column(name = "nome_residente")
+    @Column(name = "id_usuario")
+    private Integer idUser;
+    @Column(name = "nome_usuario")
 	@NotNull 
 	@Size(max=100)
-    private String nomeResidente;
-    @Column(name = "email_residente")
+    private String nomeUsuario;
+    @Column(name = "email_usuario")
 	@NotNull 
 	@Size(max=100)
     private String email;
     
     @ManyToMany
     @JoinTable(
-            name = "residente_role",
-            joinColumns = @JoinColumn(name = "residente_id"),
+            name = "usuario_role",
+            joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles;
@@ -52,8 +51,8 @@ public class User {
 	public User(Integer idUser, @NotNull @Size(max = 100) String nomeUsuario, @NotNull @Size(max = 100) String email,
 			Set<Role> roles, String password) {
 		super();
-		this.idResidente = idUser;
-		this.nomeResidente = nomeUsuario;
+		this.idUser = idUser;
+		this.nomeUsuario = nomeUsuario;
 		this.email = email;
 		this.roles = roles;
 		this.password = password;
@@ -61,19 +60,19 @@ public class User {
 
 
 	public Integer getIdUser() {
-		return idResidente;
+		return idUser;
 	}
 
 	public void setIdUser(Integer idUser) {
-		this.idResidente = idUser;
+		this.idUser = idUser;
 	}
 
 	public String getNomeUsuario() {
-		return nomeResidente;
+		return nomeUsuario;
 	}
 
 	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeResidente = nomeUsuario;
+		this.nomeUsuario = nomeUsuario;
 	}
 
 	public String getEmail() {
@@ -102,17 +101,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [idUser=" + idResidente + ", nomeUsuario=" + nomeResidente + ", email=" + email + ", roles=" + roles + ", password=" + password + "]";
-	}
-
-	public void setNomeResidente(Object object) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public Object getNomeResidente() {
-		// TODO Auto-generated method stub
-		return null;
+		return "User [idUser=" + idUser + ", nomeUsuario=" + nomeUsuario + ", email=" + email + ", roles=" + roles + ", password=" + password + "]";
 	}
 
 }

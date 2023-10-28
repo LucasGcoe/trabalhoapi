@@ -1,8 +1,9 @@
 package br.com.api.trabalhoIndividual.Services;
 
-
-
 import java.util.Properties;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,34 +11,32 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
 
 @Configuration
 @Service
 public class EmailService {
 
-	@Autowired
-	UserService userService ;
 	private JavaMailSender emailSender;
 
-    @Autowired
-    public void setJavaMailSender(JavaMailSender emailSender) {
-        this.setEmailSender(emailSender);
-    }
-	
+	@Autowired
+	public void setJavaMailSender(JavaMailSender emailSender) {
+		this.emailSender = emailSender;
+	}
+
 	@Value("${spring.mail.host}")
 	private String host;
-	
+
 	@Value("${spring.mail.port}")
 	private Integer port;
-	
+
 	@Value("${spring.mail.username}")
 	private String username;
-	
+
 	@Value("${spring.mail.password}")
 	private String password;
-	
+
 	@Bean
 	public JavaMailSender javaMailSender() {
 		JavaMailSenderImpl emailSender = new JavaMailSenderImpl();
@@ -47,22 +46,39 @@ public class EmailService {
 		emailSender.setUsername(username);
 		emailSender.setPassword(password);
 		prop.put("mail.transport.protocol", "smtp");
-        prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.starttls.enable", "true");
+		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.smtp.starttls.enable", "true");
 		emailSender.setJavaMailProperties(prop);
 		return emailSender;
 	}
+	public void envioEmailCadastro() { // é esse método que vamos copiar 
+		MimeMessage mensagemCadastro = emailSender.createMimeMessage();
 
-	public static void envioEmailInativo() {
-		// TODO Auto-generated method stub
-		
-	}
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(mensagemCadastro, true);
+			helper.setFrom("apiserrag1@gmail.com");
+			helper.setTo("lucasoliveiragcoe@gmail.com");
+			helper.setSubject("Cadastro concluido!");
 
-	public JavaMailSender getEmailSender() {
-		return emailSender;
-	}
+			StringBuilder builder = new StringBuilder();
+			builder.append("<html>\r\n");
+			builder.append("	<body>\r\n");
+			builder.append("		<div align=\"center\">\r\n");
+			builder.append("			<h1>Cadastro realizado com sucesso!</h1>\r\n");
+			builder.append("		</div>\r\n");
+			builder.append("		<br/>\r\n");
+			builder.append("		<div align=\"center\">\r\n");
+			builder.append("			Em caso de erro, ligue pro sac!!");
+			builder.append("		</div>\r\n");
+			builder.append("	</body>\r\n");
+			builder.append("</html>\r\n");
 
-	public void setEmailSender(JavaMailSender emailSender) {
-		this.emailSender = emailSender;
+			helper.setText(builder.toString(), true);
+			emailSender.send(mensagemCadastro);
+
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+
 	}
 }
